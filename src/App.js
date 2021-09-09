@@ -1,9 +1,14 @@
+import React from 'react';
 
+// Components
+import Head from './components/Head'
 
 
 function App() {
   return (
-    <div>Hi</div>
+    <div>
+      <Head />
+    </div>
   );
 }
 
