@@ -2,6 +2,11 @@ import { useState } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import { Input } from '@material-ui/core';
+import TextField from '@material-ui/core/TextField';
+
+//CSS
+import '../main.css'
 
 
 function Main() {
@@ -53,12 +58,23 @@ function Main() {
   return (
     <div style={{ padding: '20px' }}>
       <form>
+
         <label htmlFor={myGuess}>Write a Number to continue:</label>
-        <input placeholder="1 - 100" id={myGuess} name={myGuess} value={myGuess} type="number" min="1" max="100" onChange={changeHandler} required />
+        <input
+          className='input-field'
+          placeholder="1 - 20"
+          id={myGuess}
+          name={myGuess}
+          value={myGuess}
+          type="number"
+          min="1"
+          max="20"
+          onChange={changeHandler} required />
         <div style={{ padding: '10px' }}>
           <Button disabled={!myGuess} type='submit' onClick={checkGuess} variant="contained" color="primary" >
             Check!
           </Button>
+
 
         </div>
       </form>

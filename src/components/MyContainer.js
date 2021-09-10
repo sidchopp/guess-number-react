@@ -11,7 +11,7 @@ export default function MyContainer() {
   return (
     <React.Fragment>
       <CssBaseline />
-      <Container maxWidth="sm">
+      <Container fixed>
         <Typography component="div" style={{ backgroundColor: '#cfe8fc', height: '100vh' }} >
 
           <Main />
