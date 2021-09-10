@@ -46,7 +46,7 @@ function Main() {
   }
 
   function resetGame() {
-
+    setResult("")
   }
 
 
