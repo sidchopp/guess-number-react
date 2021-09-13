@@ -8,7 +8,7 @@ import TextField from '@material-ui/core/TextField';
 //CSS
 import '../main.css'
 
-
+//const randomNumber = Math.trunc(Math.random() * 20 + 1);
 function Main() {
   //let secretNumber = 16;
   //let secretNumber = Math.trunc(Math.random() * 20 + 1);
@@ -20,12 +20,13 @@ function Main() {
   const [result, setResult] = useState("");
   const [secretNumber, setSecretNumber] = useState(Math.trunc(Math.random() * 20 + 1))
 
-  console.log("Secret Number:", secretNumber);
+  console.log("Secret Number earlier:", secretNumber);
 
   // Event Handlers
 
   function checkGuess(e) {
     e.preventDefault();
+    // e.target.value = ""
 
     let Guess = Number(myGuess);
     console.log("My Guess:", Guess)
@@ -33,15 +34,18 @@ function Main() {
     if (Guess === secretNumber) {
       setResult("Congratulations! You got it right!");
       setLowOrHi("");
-      setMyGuess(0);
+
+
+
+    } else if (Guess == "" || Guess == 0) {
+      // alert("Please fill a number greater than 0");
+      setResult("Please fill a number greater than 0");
     } else if (Guess > secretNumber) {
       setResult("Wrong!");
       setLowOrHi("Last guess was too high!");
     } else if (Guess < secretNumber) {
       setResult("Wrong!");
       setLowOrHi("Last guess was too low!");
-    } else if (Guess == "" || Guess == 0) {
-      alert("Please fill a number greater than 0");
     }
   }
 
@@ -51,7 +55,13 @@ function Main() {
   }
 
   function resetGame() {
+    setMyGuess("")
     setResult("")
+
+    console.log('its reset')
+    console.log('secret number after reset', Math.trunc(Math.random() * 20 + 1));
+
+
   }
 
 
@@ -61,20 +71,29 @@ function Main() {
 
         <label htmlFor={myGuess}>Write a Number to continue:</label>
         <input
+
           className='input-field'
           placeholder="1 - 20"
-          id={myGuess}
-          name={myGuess}
-          value={myGuess}
+          // id={myGuess}
+          // name={myGuess}
+          // value={myGuess}
           type="number"
+          required
+          aria-required="true"
+
           min="1"
           max="20"
-          onChange={changeHandler} required />
+          onChange={changeHandler} />
         <div style={{ padding: '10px' }}>
-          <Button disabled={!myGuess} type='submit' onClick={checkGuess} variant="contained" color="primary" >
-            Check!
-          </Button>
 
+          {/* Conditional rendering of buttons */}
+          {Number(myGuess) === secretNumber ?
+            <Button type='submit' onClick={resetGame} variant="contained" color="secondary" >
+              Restart
+            </Button> :
+            <Button type='submit' onClick={checkGuess} variant="contained" color="primary" >
+              Check!
+            </Button>}
 
         </div>
       </form>
@@ -83,9 +102,7 @@ function Main() {
         {/* <p >{myGuess}</p> */}
         <p >{result}</p>
         <p >{lowOrHi}</p>
-        <Button type='submit' onClick={resetGame} variant="contained" color="secondary" >
-          Restart
-        </Button>
+
       </div>
     </div>
   )
